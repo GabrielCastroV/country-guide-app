@@ -43,7 +43,7 @@ input.addEventListener('input', async e =>{
         }
     }    
     if (countriesInfoFiltered.length === 1) {
-        countryContainer.focus(); // cierro el teclado del usuario desviando el focus a algo diferente del input. (exp de usuario)
+        document.body.focus(); // cierro el teclado del usuario desviando el focus a algo diferente del input. (exp de usuario)
         const lat = countriesInfoFiltered[0].latlng[0]; //extraigo los datos del pais seleccionado para luego usarlos en la llamada de la funcion del clima.
         const lon = countriesInfoFiltered[0].latlng[1];
         weatherInfo = await getWeather(lat,lon);
@@ -62,9 +62,10 @@ input.addEventListener('input', async e =>{
         ` ;
         countryContainer.style.flexDirection = 'column';
         countryContainer.style.alignItems = 'center'
+        countryContainer.style.justifyContent = 'center'
     }
     if (countriesInfoFiltered.length === 0) {
-        countryContainer.focus();
+        document.body.focus();
         countryContainer.innerHTML= `<h2>Country does not exist. Try again</h2>`;
     }
 });
