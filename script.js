@@ -1,5 +1,7 @@
 const input = document.querySelector('#input');
 const countryContainer = document.querySelector('#country-container');
+const mainContainer = document.querySelector('#main-container')
+const loaderContainer = document.querySelector('.loader-container')
 let countriesInfo = [];
 
 const getCountry = async ()=>{ //obtengo la info de todos los paises una sola vez
@@ -7,6 +9,10 @@ const getCountry = async ()=>{ //obtengo la info de todos los paises una sola ve
         const response = await fetch('https://restcountries.com/v3.1/all');
         const data = await response.json();
         countriesInfo = [...data]; // guardo los datos en un array para manipularlos luego
+        if (data) {
+            loaderContainer.style.display = 'none'
+            mainContainer.style.display = 'inline-flex'
+        }
     } catch (error) {
         alert('country api error');
     }
@@ -31,7 +37,7 @@ input.addEventListener('input', async e =>{
     if (countriesInfoFiltered.length > 10 && countriesInfoFiltered.length < 200) {
         countryContainer.innerHTML= `<h2>Your search must be more specific.</h2>`;
     }
-    if (countriesInfoFiltered.length > 0 && countriesInfoFiltered.length <= 10) {
+    if (countriesInfoFiltered.length > 1 && countriesInfoFiltered.length <= 10) {
         countryContainer.style.alignItems = 'start';
         for (let index = 0; index < countriesInfoFiltered.length; index++) {
             countryContainer.innerHTML +=`
