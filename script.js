@@ -22,6 +22,8 @@ const getWeather = async(lat,lon) =>{ // recibe dos parametros diferentes, en es
     try {
         const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=74c2a8f9872ea2e46f48453a09a41371&units=metric`);
         const weatherAPI = await weatherResponse.json();
+        console.log(weatherAPI.main.temp);
+
         return weatherAPI;
     } catch (error) {
         alert('weather api error');
